@@ -1011,4 +1011,1017 @@
                     const daysUntilDeadline = getDaysUntilDeadline(expense.deadline);
                     if (daysUntilDeadline <= 3) {
                         row.classList.add('deadline-urgent');
+                        deadlineBadge = '<span class="badge badge-danger<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionale Spese Casa</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            gap: 4px;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .nav-tab:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .table th {
+            background: #f8fafc;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table tr:hover {
+            background: #f8fafc;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--secondary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .category-hierarchy {
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .expense-amount {
+            font-weight: 600;
+            color: var(--danger);
+        }
+
+        .deadline-warning {
+            background: #fef3c7 !important;
+        }
+
+        .deadline-urgent {
+            background: #fee2e2 !important;
+        }
+
+        .category-tree {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.25rem 0;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .filters {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .export-import {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .github-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .github-modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .github-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+
+        .github-modal h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .github-step {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .github-step h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .github-url {
+            background: #e2e8f0;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            word-break: break-all;
+        }
+
+        .copy-success {
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .nav-tab {
+                text-align: center;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .export-import {
+                flex-direction: column;
+            }
+
+            .table th,
+            .table td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Gestionale Spese Casa</h1>
+            <p>Monitora e controlla tutte le tue spese domestiche</p>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div id="success-message" class="success-message"></div>
+        <div id="error-message" class="error-message"></div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="expenses">📊 Gestisci Spese</button>
+            <button class="nav-tab" data-tab="categories">📁 Categorie</button>
+            <button class="nav-tab" data-tab="deadlines">⏰ Scadenze</button>
+            <button class="nav-tab" data-tab="stats">📈 Statistiche</button>
+        </div>
+
+        <!-- Tab Gestisci Spese -->
+        <div id="expenses" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Aggiungi Nuova Spesa</h2>
+                    <div class="export-import">
+                        <button id="export-github-btn" class="btn btn-primary btn-sm">🔄 Esporta per GitHub</button>
+                        <button id="export-btn" class="btn btn-secondary btn-sm">📤 Esporta Dati</button>
+                        <input type="file" id="import-file" accept=".json" style="display: none;">
+                        <button id="import-btn" class="btn btn-secondary btn-sm">📥 Importa Dati</button>
+                    </div>
+                </div>
+                <form id="expense-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="macro-category">Macro Categoria</label>
+                            <select id="macro-category" class="form-control" required>
+                                <option value="">Seleziona macro categoria</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="sub-category">Sotto Categoria</label>
+                            <select id="sub-category" class="form-control" required>
+                                <option value="">Seleziona sotto categoria</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="voice">Voce</label>
+                            <select id="voice" class="form-control" required>
+                                <option value="">Seleziona voce</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="amount">Importo (€)</label>
+                            <input type="number" id="amount" class="form-control" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="date">Data</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="deadline">Scadenza (opzionale)</label>
+                            <input type="date" id="deadline" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="description">Descrizione (opzionale)</label>
+                        <textarea id="description" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Aggiungi Spesa</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Elenco Spese</h2>
+                </div>
+
+                <div class="filters">
+                    <div class="filters-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="filter-macro">Macro Categoria</label>
+                            <select id="filter-macro" class="form-control">
+                                <option value="">Tutte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="filter-sub">Sotto Categoria</label>
+                            <select id="filter-sub" class="form-control">
+                                <option value="">Tutte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="filter-voice">Voce</label>
+                            <select id="filter-voice" class="form-control">
+                                <option value="">Tutte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary" onclick="clearFilters()">Pulisci Filtri</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Categoria</th>
+                                <th>Importo</th>
+                                <th>Scadenza</th>
+                                <th>Descrizione</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenses-list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Categorie -->
+        <div id="categories" class="tab-content">
+            <div class="form-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Aggiungi Categoria</h2>
+                    </div>
+                    <form id="category-form">
+                        <div class="form-group">
+                            <label class="form-label" for="new-macro">Macro Categoria</label>
+                            <input type="text" id="new-macro" class="form-control" placeholder="es. CASA PRAGELATO">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="new-sub">Sotto Categoria</label>
+                            <input type="text" id="new-sub" class="form-control" placeholder="es. TASSE">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="new-voice">Voce</label>
+                            <input type="text" id="new-voice" class="form-control" placeholder="es. TARI">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Aggiungi Categoria</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Struttura Categorie</h2>
+                    </div>
+                    <div id="categories-tree" class="category-tree">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Scadenze -->
+        <div id="deadlines" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Scadenze Prossime</h2>
+                </div>
+
+                <div class="filters">
+                    <div class="filters-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="deadline-period">Periodo</label>
+                            <select id="deadline-period" class="form-control">
+                                <option value="7">Prossimi 7 giorni</option>
+                                <option value="30" selected>Prossimi 30 giorni</option>
+                                <option value="90">Prossimi 3 mesi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" onclick="updateDeadlines()">Aggiorna</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="deadlines-list">
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Statistiche -->
+        <div id="stats" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Statistiche Spese</h2>
+                </div>
+
+                <div class="filters">
+                    <div class="filters-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="stats-from">Dal</label>
+                            <input type="date" id="stats-from" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="stats-to">Al</label>
+                            <input type="date" id="stats-to" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="stats-macro">Macro Categoria</label>
+                            <select id="stats-macro" class="form-control">
+                                <option value="">Tutte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" onclick="updateStats()">Calcola</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stats-results">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Export Modal -->
+    <div id="github-modal" class="github-modal">
+        <div class="github-modal-content">
+            <button class="github-modal-close" onclick="closeGitHubModal()">×</button>
+            <h3>🔄 Aggiorna GitHub Repository</h3>
+            
+            <div class="copy-success" id="copy-success">
+                ✅ Codice copiato negli appunti!
+            </div>
+            
+            <div class="github-step">
+                <h4>Passo 1: Codice Copiato</h4>
+                <p>Il codice completo dell'app è stato copiato negli appunti automaticamente.</p>
+            </div>
+            
+            <div class="github-step">
+                <h4>Passo 2: Vai su GitHub</h4>
+                <p>Clicca il link qui sotto per aprire l'editor GitHub:</p>
+                <div class="github-url">
+                    <a href="https://github.com/arseniko1971/gestionale-spese-casa/edit/main/index.html" 
+                       target="_blank" rel="noopener">
+                       https://github.com/arseniko1971/gestionale-spese-casa/edit/main/index.html
+                    </a>
+                </div>
+            </div>
+            
+            <div class="github-step">
+                <h4>Passo 3: Sostituisci il Codice</h4>
+                <p>Nell'editor GitHub:</p>
+                <ol>
+                    <li><strong>Seleziona tutto</strong> (Ctrl+A / Cmd+A)</li>
+                    <li><strong>Incolla</strong> il nuovo codice (Ctrl+V / Cmd+V)</li>
+                    <li>Scorri in basso e clicca <strong>"Commit changes"</strong></li>
+                </ol>
+            </div>
+            
+            <div class="github-step">
+                <h4>Passo 4: Aggiornamento Automatico</h4>
+                <p>GitHub Pages aggiornerà automaticamente la tua app in <strong>1-2 minuti</strong>.</p>
+                <p>Ricarica <a href="https://arseniko1971.github.io/gestionale-spese-casa/" target="_blank">la tua app</a> per vedere le modifiche!</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="openGitHubEditor()">🚀 Vai su GitHub Editor</button>
+                <button class="btn btn-secondary" onclick="closeGitHubModal()" style="margin-left: 1rem;">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dati dell'applicazione
+        let categories = {
+            "CASA PRAGELATO": {
+                "TASSE": ["TARI", "IMU", "IRPEF"],
+                "UTENZE": ["LUCE", "GAS", "ACQUA", "TELEFONO"],
+                "MANUTENZIONE": ["IDRAULICO", "ELETTRICISTA", "PITTURA"]
+            },
+            "CASA RACCONIGI": {
+                "ABBIGLIAMENTO": ["PANTALONI", "CAMICIE", "SCARPE"],
+                "ALIMENTARI": ["SPESA", "RISTORANTE", "BAR"],
+                "TRASPORTI": ["BENZINA", "AUTOBUS", "TRENO"]
+            }
+        };
+        
+        let expenses = [];
+        
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            initializeTabs();
+            updateCategorySelects();
+            updateFilterSelects();
+            renderExpenses();
+            renderCategories();
+            updateDeadlines();
+            initializeStats();
+            
+            // Event listeners
+            document.getElementById('expense-form').addEventListener('submit', addExpense);
+            document.getElementById('category-form').addEventListener('submit', addCategory);
+            document.getElementById('macro-category').addEventListener('change', updateSubCategories);
+            document.getElementById('sub-category').addEventListener('change', updateVoices);
+            document.getElementById('filter-macro').addEventListener('change', renderExpenses);
+            document.getElementById('filter-sub').addEventListener('change', renderExpenses);
+            document.getElementById('filter-voice').addEventListener('change', renderExpenses);
+            document.getElementById('deadline-period').addEventListener('change', updateDeadlines);
+            document.getElementById('export-btn').addEventListener('click', exportData);
+            document.getElementById('export-github-btn').addEventListener('click', exportToGitHub);
+            document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
+            document.getElementById('import-file').addEventListener('change', importData);
+            
+            // Imposta data odierna
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
+        });
+        
+        // Gestione tab
+        function initializeTabs() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    showTab(targetTab);
+                });
+            });
+        }
+        
+        function showTab(tabName) {
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        // Salvataggio e caricamento dati
+        function saveData() {
+            const data = {
+                categories: categories,
+                expenses: expenses
+            };
+            localStorage.setItem('houseExpenses', JSON.stringify(data));
+        }
+        
+        function loadData() {
+            const data = localStorage.getItem('houseExpenses');
+            if (data) {
+                const parsed = JSON.parse(data);
+                categories = parsed.categories || categories;
+                expenses = parsed.expenses || [];
+            }
+        }
+        
+        function showMessage(message, type = 'success') {
+            const messageEl = document.getElementById(type + '-message');
+            messageEl.textContent = message;
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Aggiornamento select delle categorie
+        function updateCategorySelects() {
+            const selects = ['macro-category', 'filter-macro', 'stats-macro'];
+            
+            selects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                const currentValue = select.value;
+                
+                select.innerHTML = selectId === 'macro-category' ? 
+                    '<option value="">Seleziona macro categoria</option>' : 
+                    '<option value="">Tutte</option>';
+                
+                Object.keys(categories).forEach(macro => {
+                    const option = document.createElement('option');
+                    option.value = macro;
+                    option.textContent = macro;
+                    select.appendChild(option);
+                });
+                
+                if (currentValue && [...select.options].some(opt => opt.value === currentValue)) {
+                    select.value = currentValue;
+                }
+            });
+        }
+        
+        function updateSubCategories() {
+            const macro = document.getElementById('macro-category').value;
+            const subSelect = document.getElementById('sub-category');
+            const voiceSelect = document.getElementById('voice');
+            
+            subSelect.innerHTML = '<option value="">Seleziona sotto categoria</option>';
+            voiceSelect.innerHTML = '<option value="">Seleziona voce</option>';
+            
+            if (macro && categories[macro]) {
+                Object.keys(categories[macro]).forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subSelect.appendChild(option);
+                });
+            }
+        }
+        
+        function updateVoices() {
+            const macro = document.getElementById('macro-category').value;
+            const sub = document.getElementById('sub-category').value;
+            const voiceSelect = document.getElementById('voice');
+            
+            voiceSelect.innerHTML = '<option value="">Seleziona voce</option>';
+            
+            if (macro && sub && categories[macro] && categories[macro][sub]) {
+                categories[macro][sub].forEach(voice => {
+                    const option = document.createElement('option');
+                    option.value = voice;
+                    option.textContent = voice;
+                    voiceSelect.appendChild(option);
+                });
+            }
+        }
+        
+        function updateFilterSelects() {
+            const filterSub = document.getElementById('filter-sub');
+            const filterVoice = document.getElementById('filter-voice');
+            
+            filterSub.innerHTML = '<option value="">Tutte</option>';
+            filterVoice.innerHTML = '<option value="">Tutte</option>';
+            
+            const allSubs = new Set();
+            const allVoices = new Set();
+            
+            Object.values(categories).forEach(macro => {
+                Object.keys(macro).forEach(sub => {
+                    allSubs.add(sub);
+                    macro[sub].forEach(voice => allVoices.add(voice));
+                });
+            });
+            
+            [...allSubs].sort().forEach(sub => {
+                const option = document.createElement('option');
+                option.value = sub;
+                option.textContent = sub;
+                filterSub.appendChild(option);
+            });
+            
+            [...allVoices].sort().forEach(voice => {
+                const option = document.createElement('option');
+                option.value = voice;
+                option.textContent = voice;
+                filterVoice.appendChild(option);
+            });
+        }
+        
+        // Gestione spese
+        function addExpense(e) {
+            e.preventDefault();
+            
+            const expense = {
+                id: Date.now(),
+                macroCategory: document.getElementById('macro-category').value,
+                subCategory: document.getElementById('sub-category').value,
+                voice: document.getElementById('voice').value,
+                amount: parseFloat(document.getElementById('amount').value),
+                date: document.getElementById('date').value,
+                deadline: document.getElementById('deadline').value || null,
+                description: document.getElementById('description').value || ''
+            };
+            
+            expenses.unshift(expense);
+            saveData();
+            renderExpenses();
+            updateDeadlines();
+            updateStats();
+            
+            document.getElementById('expense-form').reset();
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
+            updateSubCategories();
+            updateVoices();
+            
+            showMessage('Spesa aggiunta con successo!', 'success');
+        }
+        
+        function renderExpenses() {
+            const tbody = document.getElementById('expenses-list');
+            const filterMacro = document.getElementById('filter-macro').value;
+            const filterSub = document.getElementById('filter-sub').value;
+            const filterVoice = document.getElementById('filter-voice').value;
+            
+            let filteredExpenses = expenses.filter(expense => {
+                return (!filterMacro || expense.macroCategory === filterMacro) &&
+                       (!filterSub || expense.subCategory === filterSub) &&
+                       (!filterVoice || expense.voice === filterVoice);
+            });
+            
+            tbody.innerHTML = '';
+            
+            if (filteredExpenses.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="empty-state">
+                            <div class="empty-state-icon">📋</div>
+                            <div>Nessuna spesa trovata</div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredExpenses.forEach(expense => {
+                const row = document.createElement('tr');
+                
+                let deadlineBadge = '';
+                if (expense.deadline) {
+                    const daysUntilDeadline = getDaysUntilDeadline(expense.deadline);
+                    if (daysUntilDeadline <= 3) {
+                        row.classList.add('deadline-urgent');
                         deadlineBadge = '<span class="badge badge-danger
