@@ -49,12 +49,13 @@
 
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            padding: 3rem 2rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: var(--shadow-lg);
             margin-bottom: 2rem;
             text-align: center;
             color: white;
+            position: relative;
         }
 
         .header h1 {
@@ -62,11 +63,43 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 3rem;
         }
 
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
+        }
+
+        .header-actions {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .header-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-btn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .nav-tabs {
@@ -417,8 +450,23 @@
 
         @media (max-width: 768px) {
             .container { padding: 1rem; }
-            .header { padding: 2rem 1.5rem; }
-            .header h1 { font-size: 2.25rem; }
+            .header { 
+                padding: 1.5rem; 
+                text-align: center;
+            }
+            .header h1 { 
+                font-size: 2.25rem; 
+                margin-top: 0;
+            }
+            .header-actions {
+                position: static;
+                margin-top: 1.5rem;
+                justify-content: center;
+            }
+            .header-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
             .nav-tabs { flex-direction: column; }
             .form-grid { grid-template-columns: 1fr; }
             .filters-grid { grid-template-columns: 1fr; }
@@ -431,6 +479,11 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="header-actions">
+                <button id="header-export-btn" class="header-btn">📤 Esporta</button>
+                <input type="file" id="header-import-file" accept=".json" style="display: none;">
+                <button id="header-import-btn" class="header-btn">📥 Importa</button>
+            </div>
             <h1>🏠 Gestionale Spese Casa</h1>
             <p>Monitora e controlla tutte le tue spese domestiche</p>
         </div>
@@ -675,10 +728,17 @@
             document.getElementById('filter-sub').addEventListener('change', renderExpenses);
             document.getElementById('filter-voice').addEventListener('change', renderExpenses);
             
-            // Buttons
+            // Buttons - Tab Gestisci Spese
             document.getElementById('export-btn').addEventListener('click', exportData);
             document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
             document.getElementById('import-file').addEventListener('change', importData);
+            
+            // Buttons - Header (nuovi)
+            document.getElementById('header-export-btn').addEventListener('click', exportData);
+            document.getElementById('header-import-btn').addEventListener('click', () => document.getElementById('header-import-file').click());
+            document.getElementById('header-import-file').addEventListener('change', importData);
+            
+            // Other buttons
             document.getElementById('clear-filters-btn').addEventListener('click', clearFilters);
             document.getElementById('update-deadlines-btn').addEventListener('click', updateDeadlines);
             document.getElementById('update-stats-btn').addEventListener('click', updateStats);
@@ -781,554 +841,3 @@
                     option.value = macro;
                     option.textContent = macro;
                     select.appendChild(option);
-                });
-                
-                if (currentValue) select.value = currentValue;
-            });
-        }
-        
-        function updateSubCategories() {
-            const macro = document.getElementById('macro-category').value;
-            const subSelect = document.getElementById('sub-category');
-            subSelect.innerHTML = '<option value="">Seleziona sotto categoria</option>';
-            
-            if (macro && categories[macro] && Array.isArray(categories[macro])) {
-                categories[macro].forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub;
-                    option.textContent = sub;
-                    subSelect.appendChild(option);
-                });
-            }
-        }
-        
-        function updateFilterSelects() {
-            const filterSub = document.getElementById('filter-sub');
-            const filterVoice = document.getElementById('filter-voice');
-            
-            filterSub.innerHTML = '<option value="">Tutte</option>';
-            filterVoice.innerHTML = '<option value="">Tutte</option>';
-            
-            const allSubs = new Set();
-            const allVoices = new Set();
-            
-            Object.values(categories).forEach(macro => {
-                if (Array.isArray(macro)) {
-                    macro.forEach(sub => allSubs.add(sub));
-                }
-            });
-            
-            expenses.forEach(expense => {
-                if (expense.voice) allVoices.add(expense.voice);
-            });
-            
-            [...allSubs].sort().forEach(sub => {
-                const option = document.createElement('option');
-                option.value = sub;
-                option.textContent = sub;
-                filterSub.appendChild(option);
-            });
-            
-            [...allVoices].sort().forEach(voice => {
-                const option = document.createElement('option');
-                option.value = voice;
-                option.textContent = voice;
-                filterVoice.appendChild(option);
-            });
-        }
-        
-        function addExpense(e) {
-            e.preventDefault();
-            
-            const expense = {
-                id: Date.now(),
-                macroCategory: document.getElementById('macro-category').value,
-                subCategory: document.getElementById('sub-category').value,
-                voice: document.getElementById('voice').value.trim(),
-                amount: parseFloat(document.getElementById('amount').value),
-                date: document.getElementById('date').value,
-                deadline: document.getElementById('deadline').value || null,
-                description: document.getElementById('description').value || ''
-            };
-            
-            expenses.unshift(expense);
-            saveData();
-            renderExpenses();
-            updateDeadlines();
-            updateStats();
-            updateFilterSelects();
-            
-            document.getElementById('expense-form').reset();
-            document.getElementById('date').value = new Date().toISOString().split('T')[0];
-            updateSubCategories();
-            
-            showMessage('Spesa aggiunta con successo!', 'success');
-        }
-        
-        function renderExpenses() {
-            const tbody = document.getElementById('expenses-list');
-            const filterMacro = document.getElementById('filter-macro').value;
-            const filterSub = document.getElementById('filter-sub').value;
-            const filterVoice = document.getElementById('filter-voice').value;
-            
-            let filteredExpenses = expenses.filter(expense => {
-                return (!filterMacro || expense.macroCategory === filterMacro) &&
-                       (!filterSub || expense.subCategory === filterSub) &&
-                       (!filterVoice || expense.voice === filterVoice);
-            });
-            
-            tbody.innerHTML = '';
-            
-            if (filteredExpenses.length === 0) {
-                tbody.innerHTML = `
-                    <tr><td colspan="6" class="empty-state">
-                        <div class="empty-state-icon">📋</div>
-                        <div>Nessuna spesa trovata</div>
-                    </td></tr>
-                `;
-                return;
-            }
-            
-            filteredExpenses.forEach(expense => {
-                const row = document.createElement('tr');
-                
-                let deadlineBadge = '';
-                if (expense.deadline) {
-                    const daysUntil = getDaysUntilDeadline(expense.deadline);
-                    if (daysUntil <= 3) {
-                        row.classList.add('deadline-urgent');
-                        deadlineBadge = '<span class="badge badge-danger">Urgente</span>';
-                    } else if (daysUntil <= 7) {
-                        row.classList.add('deadline-warning');
-                        deadlineBadge = '<span class="badge badge-warning">Prossima</span>';
-                    }
-                }
-                
-                row.innerHTML = `
-                    <td>${formatDate(expense.date)}</td>
-                    <td>
-                        <div class="category-hierarchy">
-                            <strong>${expense.macroCategory}</strong><br>
-                            ${expense.subCategory ? `└ ${expense.subCategory}<br>` : ''}
-                            &nbsp;&nbsp;└ ${expense.voice}
-                        </div>
-                    </td>
-                    <td><span class="expense-amount">€ ${expense.amount.toFixed(2)}</span></td>
-                    <td>
-                        ${expense.deadline ? formatDate(expense.deadline) : '-'}
-                        ${deadlineBadge}
-                    </td>
-                    <td>${expense.description || '-'}</td>
-                    <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteExpense(${expense.id})">
-                            Elimina
-                        </button>
-                    </td>
-                `;
-                
-                tbody.appendChild(row);
-            });
-        }
-        
-        function deleteExpense(id) {
-            if (confirm('Sei sicuro di voler eliminare questa spesa?')) {
-                expenses = expenses.filter(expense => expense.id !== id);
-                saveData();
-                renderExpenses();
-                updateDeadlines();
-                updateStats();
-                showMessage('Spesa eliminata', 'success');
-            }
-        }
-        
-        function clearFilters() {
-            document.getElementById('filter-macro').value = '';
-            document.getElementById('filter-sub').value = '';
-            document.getElementById('filter-voice').value = '';
-            renderExpenses();
-        }
-        
-        function addCategoryClick() {
-            console.log('addCategoryClick chiamata!');
-            
-            const macroInput = document.getElementById('new-macro');
-            const subInput = document.getElementById('new-sub');
-            
-            if (!macroInput || !subInput) {
-                console.error('Input non trovati!');
-                showMessage('Errore: campi non trovati', 'error');
-                return;
-            }
-            
-            const macro = macroInput.value.trim().toUpperCase();
-            const sub = subInput.value.trim().toUpperCase();
-            
-            console.log('Valori letti:', {macro, sub});
-            
-            if (!macro) {
-                showMessage('Inserisci una macro categoria!', 'error');
-                return;
-            }
-            
-            // Crea o aggiorna categoria
-            if (!categories[macro]) {
-                // Nuova macro categoria
-                categories[macro] = sub ? [sub] : [];
-                console.log('Nuova macro categoria creata:', macro);
-                showMessage(`Macro categoria "${macro}" creata${sub ? ` con sottocategoria "${sub}"` : ''}!`, 'success');
-            } else {
-                // Macro categoria esiste già
-                if (sub) {
-                    if (!categories[macro].includes(sub)) {
-                        categories[macro].push(sub);
-                        categories[macro].sort();
-                        console.log('Sottocategoria aggiunta:', sub);
-                        showMessage(`Sottocategoria "${sub}" aggiunta a "${macro}"!`, 'success');
-                    } else {
-                        showMessage(`La sottocategoria "${sub}" esiste già in "${macro}"!`, 'error');
-                        return;
-                    }
-                } else {
-                    showMessage(`La macro categoria "${macro}" esiste già! Aggiungi una sottocategoria o usa un nome diverso.`, 'error');
-                    return;
-                }
-            }
-            
-            console.log('Categories dopo aggiunta:', categories);
-            
-            // Salva e aggiorna
-            saveData();
-            updateAllSelects();
-            renderCategories();
-            
-            // Reset solo campo sottocategoria per permettere aggiunta multipla
-            subInput.value = '';
-            // Mantieni la macro categoria per aggiungere più sottocategorie facilmente
-        }
-        
-        function renderCategories() {
-            const tree = document.getElementById('categories-tree');
-            tree.innerHTML = '';
-            
-            // Aggiorna anche le opzioni datalist
-            updateDatalistOptions();
-            updateSubDatalist();
-            
-            if (Object.keys(categories).length === 0) {
-                tree.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📁</div>
-                        <div>Nessuna categoria configurata</div>
-                        <div style="margin-top: 1rem; font-size: 0.875rem;">
-                            Aggiungi una macro categoria per iniziare
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            
-            Object.keys(categories).sort().forEach(macro => {
-                const macroDiv = document.createElement('div');
-                macroDiv.innerHTML = `
-                    <div class="category-item">
-                        <strong>📂 ${macro}</strong>
-                        <button class="btn btn-danger btn-sm" onclick="deleteMacroCategory('${macro}')">
-                            Elimina
-                        </button>
-                    </div>
-                `;
-                tree.appendChild(macroDiv);
-                
-                if (Array.isArray(categories[macro])) {
-                    categories[macro].forEach(sub => {
-                        const subDiv = document.createElement('div');
-                        subDiv.style.marginLeft = '20px';
-                        subDiv.innerHTML = `
-                            <div class="category-item">
-                                <span>📁 ${sub}</span>
-                                <button class="btn btn-danger btn-sm" onclick="deleteSubCategory('${macro}', '${sub}')">
-                                    Elimina
-                                </button>
-                            </div>
-                        `;
-                        tree.appendChild(subDiv);
-                    });
-                }
-            });
-        }
-        
-        function deleteMacroCategory(macro) {
-            if (!confirm(`Eliminare "${macro}"?`)) return;
-            
-            const hasExpenses = expenses.some(expense => expense.macroCategory === macro);
-            if (hasExpenses) {
-                showMessage('Impossibile eliminare: ci sono spese associate', 'error');
-                return;
-            }
-            
-            delete categories[macro];
-            saveData();
-            updateAllSelects();
-            renderCategories();
-            showMessage('Categoria eliminata', 'success');
-        }
-        
-        function deleteSubCategory(macro, sub) {
-            if (!confirm(`Eliminare "${sub}"?`)) return;
-            
-            const hasExpenses = expenses.some(expense => 
-                expense.macroCategory === macro && expense.subCategory === sub
-            );
-            if (hasExpenses) {
-                showMessage('Impossibile eliminare: ci sono spese associate', 'error');
-                return;
-            }
-            
-            const index = categories[macro].indexOf(sub);
-            if (index > -1) {
-                categories[macro].splice(index, 1);
-            }
-            
-            saveData();
-            updateAllSelects();
-            renderCategories();
-            showMessage('Sottocategoria eliminata', 'success');
-        }
-        
-        function updateDeadlines() {
-            const period = parseInt(document.getElementById('deadline-period').value);
-            const container = document.getElementById('deadlines-list');
-            
-            const today = new Date();
-            const futureDate = new Date();
-            futureDate.setDate(today.getDate() + period);
-            
-            const upcomingDeadlines = expenses.filter(expense => {
-                if (!expense.deadline) return false;
-                const deadlineDate = new Date(expense.deadline);
-                return deadlineDate >= today && deadlineDate <= futureDate;
-            }).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-            
-            container.innerHTML = '';
-            
-            if (upcomingDeadlines.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📅</div>
-                        <div>Nessuna scadenza nel periodo selezionato</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            upcomingDeadlines.forEach(expense => {
-                const daysUntil = getDaysUntilDeadline(expense.deadline);
-                let badgeClass = 'badge-warning';
-                let urgencyText = `Scade tra ${daysUntil} giorni`;
-                
-                if (daysUntil <= 3) {
-                    badgeClass = 'badge-danger';
-                    urgencyText = `Scade tra ${daysUntil} giorni`;
-                }
-                
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <div class="category-hierarchy">
-                                <strong>${expense.macroCategory}</strong>
-                                ${expense.subCategory ? ` → ${expense.subCategory}` : ''}
-                                → ${expense.voice}
-                            </div>
-                            <div class="expense-amount">€ ${expense.amount.toFixed(2)}</div>
-                            <div style="color: var(--gray-500); margin-top: 0.25rem;">
-                                ${expense.description || 'Nessuna descrizione'}
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="margin-bottom: 0.5rem;">
-                                <strong>${formatDate(expense.deadline)}</strong>
-                            </div>
-                            <span class="badge ${badgeClass}">${urgencyText}</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-        
-        function initializeStats() {
-            const today = new Date();
-            const firstDay = new Date(today.getFullYear(), 0, 1);
-            
-            document.getElementById('stats-from').value = firstDay.toISOString().split('T')[0];
-            document.getElementById('stats-to').value = today.toISOString().split('T')[0];
-            
-            updateStats();
-        }
-        
-        function updateStats() {
-            const fromDate = document.getElementById('stats-from').value;
-            const toDate = document.getElementById('stats-to').value;
-            const macroFilter = document.getElementById('stats-macro').value;
-            const container = document.getElementById('stats-results');
-            
-            if (!fromDate || !toDate) {
-                container.innerHTML = '<p>Seleziona un periodo valido.</p>';
-                return;
-            }
-            
-            const filteredExpenses = expenses.filter(expense => {
-                const expenseDate = new Date(expense.date);
-                const from = new Date(fromDate);
-                const to = new Date(toDate);
-                
-                const inPeriod = expenseDate >= from && expenseDate <= to;
-                const matchesMacro = !macroFilter || expense.macroCategory === macroFilter;
-                
-                return inPeriod && matchesMacro;
-            });
-            
-            if (filteredExpenses.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📊</div>
-                        <div>Nessuna spesa nel periodo selezionato</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            const totalAmount = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
-            const avgAmount = totalAmount / filteredExpenses.length;
-            
-            const byMacro = {};
-            filteredExpenses.forEach(expense => {
-                if (!byMacro[expense.macroCategory]) {
-                    byMacro[expense.macroCategory] = { total: 0, count: 0 };
-                }
-                byMacro[expense.macroCategory].total += expense.amount;
-                byMacro[expense.macroCategory].count += 1;
-            });
-            
-            container.innerHTML = `
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-value">€ ${totalAmount.toFixed(2)}</span>
-                        <div class="stat-label">Totale Spese</div>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value">${filteredExpenses.length}</span>
-                        <div class="stat-label">Numero Spese</div>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value">€ ${avgAmount.toFixed(2)}</span>
-                        <div class="stat-label">Media per Spesa</div>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value">${Object.keys(byMacro).length}</span>
-                        <div class="stat-label">Macro Categorie</div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Per Macro Categoria</h3>
-                    </div>
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Macro Categoria</th>
-                                    <th>Totale</th>
-                                    <th>Numero Spese</th>
-                                    <th>Media</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${Object.entries(byMacro)
-                                    .sort((a, b) => b[1].total - a[1].total)
-                                    .map(([category, data]) => `
-                                        <tr>
-                                            <td><strong>${category}</strong></td>
-                                            <td class="expense-amount">€ ${data.total.toFixed(2)}</td>
-                                            <td>${data.count}</td>
-                                            <td>€ ${(data.total / data.count).toFixed(2)}</td>
-                                        </tr>
-                                    `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
-        }
-        
-        function exportData() {
-            const data = {
-                categories: categories,
-                expenses: expenses,
-                exportDate: new Date().toISOString()
-            };
-            
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `spese-${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showMessage('Dati esportati!', 'success');
-        }
-        
-        function importData(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                try {
-                    const data = JSON.parse(event.target.result);
-                    
-                    if (!data.categories || !data.expenses) {
-                        throw new Error('File non valido');
-                    }
-                    
-                    if (confirm('Sostituire tutti i dati attuali?')) {
-                        categories = data.categories;
-                        expenses = data.expenses;
-                        
-                        saveData();
-                        updateAllSelects();
-                        renderExpenses();
-                        renderCategories();
-                        updateDeadlines();
-                        updateStats();
-                        
-                        showMessage('Dati importati!', 'success');
-                    }
-                } catch (error) {
-                    showMessage('Errore importazione file', 'error');
-                }
-            };
-            reader.readAsText(file);
-            e.target.value = '';
-        }
-        
-        function formatDate(dateString) {
-            return new Date(dateString).toLocaleDateString('it-IT');
-        }
-        
-        function getDaysUntilDeadline(deadlineString) {
-            const today = new Date();
-            const deadline = new Date(deadlineString);
-            const diffTime = deadline - today;
-            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        }
-    </script>
-</body>
-</html>
