@@ -5,93 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionale Spese Casa</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #64748b;
-            --success: #059669;
-            --danger: #dc2626;
-            --warning: #d97706;
-            --light: #f8fafc;
-            --dark: #1e293b;
-            --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --primary-light: #a5b4fc;
+            --secondary: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f1f5f9;
-            color: var(--dark);
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+            color: var(--gray-900);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
 
         .header {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
             margin-bottom: 2rem;
             text-align: center;
+            color: white;
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
-            color: var(--primary);
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .header p {
-            color: var(--secondary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         .nav-tabs {
             display: flex;
             background: white;
-            border-radius: 12px;
-            padding: 8px;
+            border-radius: 16px;
+            padding: 6px;
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
             gap: 4px;
-            overflow-x: auto;
         }
 
         .nav-tab {
             flex: 1;
-            padding: 12px 20px;
+            padding: 16px 24px;
             background: transparent;
             border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            color: var(--secondary);
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--gray-600);
             cursor: pointer;
             transition: all 0.2s ease;
-            white-space: nowrap;
-            min-width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .nav-tab:hover {
-            background: #f1f5f9;
+            background: var(--gray-50);
             color: var(--primary);
         }
 
         .nav-tab.active {
             background: var(--primary);
             color: white;
+            box-shadow: var(--shadow);
         }
 
         .tab-content {
@@ -104,119 +116,127 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .card {
             background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
             box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-100);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-100);
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
         }
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 0.875rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.875rem;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1rem;
             background: white;
             transition: all 0.2s ease;
+            font-family: inherit;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.875rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-decoration: none;
+            font-family: inherit;
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
+            box-shadow: var(--shadow);
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
 
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+            transform: translateY(-1px);
+        }
+
         .btn-danger {
-            background: var(--danger);
+            background: linear-gradient(135deg, var(--danger), #dc2626);
             color: white;
         }
 
         .btn-danger:hover {
-            background: #b91c1c;
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #475569;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
         }
 
         .table-container {
-            overflow-x: auto;
-            border-radius: 8px;
-            border: 1px solid var(--border);
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow);
         }
 
         .table {
@@ -226,29 +246,32 @@
         }
 
         .table th {
-            background: #f8fafc;
-            padding: 1rem;
+            background: var(--gray-50);
+            padding: 1.5rem 1.25rem;
             text-align: left;
-            font-weight: 600;
-            color: var(--dark);
-            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+            color: var(--gray-800);
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.875rem;
         }
 
         .table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--gray-100);
+            vertical-align: top;
         }
 
         .table tr:hover {
-            background: #f8fafc;
+            background: var(--gray-50);
         }
 
         .badge {
             display: inline-flex;
-            padding: 0.25rem 0.75rem;
+            align-items: center;
+            padding: 0.5rem 1rem;
             border-radius: 9999px;
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .badge-warning {
@@ -263,40 +286,125 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .stat-card {
             background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
+            padding: 2rem;
+            border-radius: 20px;
             box-shadow: var(--shadow);
             text-align: center;
+            border: 1px solid var(--gray-100);
+            position: relative;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         }
 
         .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--primary);
             display: block;
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            color: var(--secondary);
+            color: var(--gray-600);
             font-size: 0.875rem;
-            margin-top: 0.5rem;
+            font-weight: 600;
         }
 
         .category-hierarchy {
             font-size: 0.875rem;
-            line-height: 1.4;
+            line-height: 1.6;
+            color: var(--gray-700);
         }
 
         .expense-amount {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--danger);
+            font-size: 1.1rem;
+        }
+
+        .category-tree {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            margin: 0.5rem 0;
+            background: var(--gray-50);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            border: 1px solid var(--gray-100);
+        }
+
+        .filters {
+            background: var(--gray-50);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            align-items: end;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gray-500);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .success-message, .error-message {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid var(--success);
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid var(--danger);
+        }
+
+        .export-import {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .deadline-warning {
@@ -307,115 +415,16 @@
             background: #fee2e2 !important;
         }
 
-        .category-tree {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .category-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            margin: 0.25rem 0;
-            background: #f8fafc;
-            border-radius: 6px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .filters {
-            background: #f8fafc;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            align-items: end;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--secondary);
-        }
-
-        .empty-state-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .success-message {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .error-message {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .export-import {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .header {
-                padding: 1.5rem;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .nav-tabs {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .nav-tab {
-                text-align: center;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .filters-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-
-            .export-import {
-                flex-direction: column;
-            }
-
-            .table th,
-            .table td {
-                padding: 0.75rem 0.5rem;
-                font-size: 0.875rem;
-            }
+            .container { padding: 1rem; }
+            .header { padding: 2rem 1.5rem; }
+            .header h1 { font-size: 2.25rem; }
+            .nav-tabs { flex-direction: column; }
+            .form-grid { grid-template-columns: 1fr; }
+            .filters-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .export-import { flex-direction: column; }
+            .card { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -426,7 +435,6 @@
             <p>Monitora e controlla tutte le tue spese domestiche</p>
         </div>
 
-        <!-- Success/Error Messages -->
         <div id="success-message" class="success-message"></div>
         <div id="error-message" class="error-message"></div>
 
@@ -443,9 +451,9 @@
                 <div class="card-header">
                     <h2 class="card-title">Aggiungi Nuova Spesa</h2>
                     <div class="export-import">
-                        <button id="export-btn" class="btn btn-secondary btn-sm">📤 Esporta Dati</button>
+                        <button id="export-btn" class="btn btn-secondary btn-sm">📤 Esporta</button>
                         <input type="file" id="import-file" accept=".json" style="display: none;">
-                        <button id="import-btn" class="btn btn-secondary btn-sm">📥 Importa Dati</button>
+                        <button id="import-btn" class="btn btn-secondary btn-sm">📥 Importa</button>
                     </div>
                 </div>
                 <form id="expense-form">
@@ -458,15 +466,13 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="sub-category">Sotto Categoria</label>
-                            <select id="sub-category" class="form-control" required>
+                            <select id="sub-category" class="form-control">
                                 <option value="">Seleziona sotto categoria</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="voice">Voce</label>
-                            <select id="voice" class="form-control" required>
-                                <option value="">Seleziona voce</option>
-                            </select>
+                            <input type="text" id="voice" class="form-control" placeholder="es. TARI" required>
                         </div>
                     </div>
 
@@ -480,13 +486,13 @@
                             <input type="date" id="date" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="deadline">Scadenza (opzionale)</label>
+                            <label class="form-label" for="deadline">Scadenza</label>
                             <input type="date" id="deadline" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="description">Descrizione (opzionale)</label>
+                        <label class="form-label" for="description">Descrizione</label>
                         <textarea id="description" class="form-control" rows="3"></textarea>
                     </div>
 
@@ -520,7 +526,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-secondary" id="clear-filters-btn">Pulisci Filtri</button>
+                            <button type="button" class="btn btn-secondary" id="clear-filters-btn">Pulisci</button>
                         </div>
                     </div>
                 </div>
@@ -537,8 +543,7 @@
                                 <th>Azioni</th>
                             </tr>
                         </thead>
-                        <tbody id="expenses-list">
-                        </tbody>
+                        <tbody id="expenses-list"></tbody>
                     </table>
                 </div>
             </div>
@@ -551,29 +556,31 @@
                     <div class="card-header">
                         <h2 class="card-title">Aggiungi Categoria</h2>
                     </div>
-                    <form id="category-form">
+                    <div>
                         <div class="form-group">
                             <label class="form-label" for="new-macro">Macro Categoria</label>
-                            <input type="text" id="new-macro" class="form-control" placeholder="es. CASA PRAGELATO">
+                            <input type="text" id="new-macro" class="form-control" placeholder="es. CASA PRAGELATO" 
+                                   list="existing-macros" autocomplete="off">
+                            <datalist id="existing-macros"></datalist>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="new-sub">Sotto Categoria</label>
-                            <input type="text" id="new-sub" class="form-control" placeholder="es. TASSE">
+                            <label class="form-label" for="new-sub">Sotto Categoria (opzionale)</label>
+                            <input type="text" id="new-sub" class="form-control" placeholder="es. TASSE" 
+                                   list="existing-subs" autocomplete="off">
+                            <datalist id="existing-subs"></datalist>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label" for="new-voice">Voce</label>
-                            <input type="text" id="new-voice" class="form-control" placeholder="es. TARI">
+                        <button type="button" class="btn btn-primary" id="add-category-btn">Aggiungi Categoria</button>
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--gray-50); border-radius: 8px; font-size: 0.875rem; color: var(--gray-600);">
+                            💡 <strong>Suggerimento:</strong> Digita per vedere le categorie esistenti o scrivi una nuova categoria
                         </div>
-                        <button type="submit" class="btn btn-primary">Aggiungi Categoria</button>
-                    </form>
+                    </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Struttura Categorie</h2>
+                        <h2 class="card-title">Le Tue Categorie</h2>
                     </div>
-                    <div id="categories-tree" class="category-tree">
-                    </div>
+                    <div id="categories-tree" class="category-tree"></div>
                 </div>
             </div>
         </div>
@@ -584,15 +591,14 @@
                 <div class="card-header">
                     <h2 class="card-title">Scadenze Prossime</h2>
                 </div>
-
                 <div class="filters">
                     <div class="filters-grid">
                         <div class="form-group">
                             <label class="form-label" for="deadline-period">Periodo</label>
                             <select id="deadline-period" class="form-control">
-                                <option value="7">Prossimi 7 giorni</option>
-                                <option value="30" selected>Prossimi 30 giorni</option>
-                                <option value="90">Prossimi 3 mesi</option>
+                                <option value="7">7 giorni</option>
+                                <option value="30" selected>30 giorni</option>
+                                <option value="90">3 mesi</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -600,9 +606,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="deadlines-list">
-                </div>
+                <div id="deadlines-list"></div>
             </div>
         </div>
 
@@ -612,7 +616,6 @@
                 <div class="card-header">
                     <h2 class="card-title">Statistiche Spese</h2>
                 </div>
-
                 <div class="filters">
                     <div class="filters-grid">
                         <div class="form-group">
@@ -634,67 +637,43 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="stats-results">
-                </div>
+                <div id="stats-results"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Dati dell'applicazione
-        let categories = {
-            "CASA PRAGELATO": {
-                "TASSE": ["TARI", "IMU", "IRPEF"],
-                "UTENZE": ["LUCE", "GAS", "ACQUA", "TELEFONO"],
-                "MANUTENZIONE": ["IDRAULICO", "ELETTRICISTA", "PITTURA"]
-            },
-            "CASA RACCONIGI": {
-                "ABBIGLIAMENTO": ["PANTALONI", "CAMICIE", "SCARPE"],
-                "ALIMENTARI": ["SPESA", "RISTORANTE", "BAR"],
-                "TRASPORTI": ["BENZINA", "AUTOBUS", "TRENO"]
-            }
-        };
-        
+        let categories = {};
         let expenses = [];
         
-        // Inizializzazione
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('App inizializzata');
             loadData();
-            initializeTabs();
             setupEventListeners();
             updateAllSelects();
             renderExpenses();
             renderCategories();
             updateDeadlines();
             initializeStats();
-            
-            // Imposta data odierna
             document.getElementById('date').value = new Date().toISOString().split('T')[0];
         });
         
-        // Setup Event Listeners
         function setupEventListeners() {
             // Tab navigation
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
-                    const targetTab = this.getAttribute('data-tab');
-                    showTab(targetTab);
+                    showTab(this.getAttribute('data-tab'));
                 });
             });
             
             // Forms
             document.getElementById('expense-form').addEventListener('submit', addExpense);
-            document.getElementById('category-form').addEventListener('submit', addCategory);
+            document.getElementById('add-category-btn').addEventListener('click', addCategoryClick);
             
             // Selects
             document.getElementById('macro-category').addEventListener('change', updateSubCategories);
-            document.getElementById('sub-category').addEventListener('change', updateVoices);
             document.getElementById('filter-macro').addEventListener('change', renderExpenses);
             document.getElementById('filter-sub').addEventListener('change', renderExpenses);
             document.getElementById('filter-voice').addEventListener('change', renderExpenses);
-            document.getElementById('deadline-period').addEventListener('change', updateDeadlines);
             
             // Buttons
             document.getElementById('export-btn').addEventListener('click', exportData);
@@ -703,42 +682,76 @@
             document.getElementById('clear-filters-btn').addEventListener('click', clearFilters);
             document.getElementById('update-deadlines-btn').addEventListener('click', updateDeadlines);
             document.getElementById('update-stats-btn').addEventListener('click', updateStats);
+            document.getElementById('deadline-period').addEventListener('change', updateDeadlines);
+            
+            // Category input listeners
+            document.getElementById('new-macro').addEventListener('input', updateDatalistOptions);
+            document.getElementById('new-macro').addEventListener('focus', updateDatalistOptions);
+            document.getElementById('new-sub').addEventListener('input', updateSubDatalist);
+            document.getElementById('new-sub').addEventListener('focus', updateSubDatalist);
         }
         
-        // Gestione tab
-        function initializeTabs() {
-            console.log('Inizializzazione tab');
+        function updateDatalistOptions() {
+            const datalist = document.getElementById('existing-macros');
+            datalist.innerHTML = '';
+            
+            Object.keys(categories).forEach(macro => {
+                const option = document.createElement('option');
+                option.value = macro;
+                datalist.appendChild(option);
+            });
+        }
+        
+        function updateSubDatalist() {
+            const macro = document.getElementById('new-macro').value.trim().toUpperCase();
+            const datalist = document.getElementById('existing-subs');
+            datalist.innerHTML = '';
+            
+            // Mostra sottocategorie della macro selezionata
+            if (macro && categories[macro] && Array.isArray(categories[macro])) {
+                categories[macro].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    datalist.appendChild(option);
+                });
+            } else {
+                // Mostra tutte le sottocategorie esistenti
+                const allSubs = new Set();
+                Object.values(categories).forEach(macro => {
+                    if (Array.isArray(macro)) {
+                        macro.forEach(sub => allSubs.add(sub));
+                    }
+                });
+                
+                [...allSubs].sort().forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    datalist.appendChild(option);
+                });
+            }
         }
         
         function showTab(tabName) {
-            console.log('Switching to tab:', tabName);
-            
-            // Rimuovi classe active da tutti i tab e contenuti
             document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            // Aggiungi classe active al tab selezionato
             document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
             document.getElementById(tabName).classList.add('active');
         }
         
-        // Salvataggio e caricamento dati
         function saveData() {
-            const data = {
+            localStorage.setItem('houseExpenses', JSON.stringify({
                 categories: categories,
                 expenses: expenses
-            };
-            localStorage.setItem('houseExpenses', JSON.stringify(data));
-            console.log('Data saved:', data);
+            }));
         }
         
         function loadData() {
             const data = localStorage.getItem('houseExpenses');
             if (data) {
                 const parsed = JSON.parse(data);
-                categories = parsed.categories || categories;
+                categories = parsed.categories || {};
                 expenses = parsed.expenses || [];
-                console.log('Data loaded:', parsed);
             }
         }
         
@@ -746,13 +759,9 @@
             const messageEl = document.getElementById(type + '-message');
             messageEl.textContent = message;
             messageEl.style.display = 'block';
-            
-            setTimeout(() => {
-                messageEl.style.display = 'none';
-            }, 5000);
+            setTimeout(() => messageEl.style.display = 'none', 5000);
         }
         
-        // Aggiornamento select
         function updateAllSelects() {
             updateCategorySelects();
             updateFilterSelects();
@@ -760,11 +769,9 @@
         
         function updateCategorySelects() {
             const selects = ['macro-category', 'filter-macro', 'stats-macro'];
-            
             selects.forEach(selectId => {
                 const select = document.getElementById(selectId);
                 const currentValue = select.value;
-                
                 select.innerHTML = selectId === 'macro-category' ? 
                     '<option value="">Seleziona macro categoria</option>' : 
                     '<option value="">Tutte</option>';
@@ -776,43 +783,21 @@
                     select.appendChild(option);
                 });
                 
-                if (currentValue && [...select.options].some(opt => opt.value === currentValue)) {
-                    select.value = currentValue;
-                }
+                if (currentValue) select.value = currentValue;
             });
         }
         
         function updateSubCategories() {
             const macro = document.getElementById('macro-category').value;
             const subSelect = document.getElementById('sub-category');
-            const voiceSelect = document.getElementById('voice');
-            
             subSelect.innerHTML = '<option value="">Seleziona sotto categoria</option>';
-            voiceSelect.innerHTML = '<option value="">Seleziona voce</option>';
             
-            if (macro && categories[macro]) {
-                Object.keys(categories[macro]).forEach(sub => {
+            if (macro && categories[macro] && Array.isArray(categories[macro])) {
+                categories[macro].forEach(sub => {
                     const option = document.createElement('option');
                     option.value = sub;
                     option.textContent = sub;
                     subSelect.appendChild(option);
-                });
-            }
-        }
-        
-        function updateVoices() {
-            const macro = document.getElementById('macro-category').value;
-            const sub = document.getElementById('sub-category').value;
-            const voiceSelect = document.getElementById('voice');
-            
-            voiceSelect.innerHTML = '<option value="">Seleziona voce</option>';
-            
-            if (macro && sub && categories[macro] && categories[macro][sub]) {
-                categories[macro][sub].forEach(voice => {
-                    const option = document.createElement('option');
-                    option.value = voice;
-                    option.textContent = voice;
-                    voiceSelect.appendChild(option);
                 });
             }
         }
@@ -828,10 +813,13 @@
             const allVoices = new Set();
             
             Object.values(categories).forEach(macro => {
-                Object.keys(macro).forEach(sub => {
-                    allSubs.add(sub);
-                    macro[sub].forEach(voice => allVoices.add(voice));
-                });
+                if (Array.isArray(macro)) {
+                    macro.forEach(sub => allSubs.add(sub));
+                }
+            });
+            
+            expenses.forEach(expense => {
+                if (expense.voice) allVoices.add(expense.voice);
             });
             
             [...allSubs].sort().forEach(sub => {
@@ -849,17 +837,14 @@
             });
         }
         
-        // Gestione spese
         function addExpense(e) {
             e.preventDefault();
-            
-            console.log('Adding expense');
             
             const expense = {
                 id: Date.now(),
                 macroCategory: document.getElementById('macro-category').value,
                 subCategory: document.getElementById('sub-category').value,
-                voice: document.getElementById('voice').value,
+                voice: document.getElementById('voice').value.trim(),
                 amount: parseFloat(document.getElementById('amount').value),
                 date: document.getElementById('date').value,
                 deadline: document.getElementById('deadline').value || null,
@@ -871,12 +856,11 @@
             renderExpenses();
             updateDeadlines();
             updateStats();
+            updateFilterSelects();
             
-            // Reset form
             document.getElementById('expense-form').reset();
             document.getElementById('date').value = new Date().toISOString().split('T')[0];
             updateSubCategories();
-            updateVoices();
             
             showMessage('Spesa aggiunta con successo!', 'success');
         }
@@ -887,7 +871,6 @@
             const filterSub = document.getElementById('filter-sub').value;
             const filterVoice = document.getElementById('filter-voice').value;
             
-            // Filtra le spese
             let filteredExpenses = expenses.filter(expense => {
                 return (!filterMacro || expense.macroCategory === filterMacro) &&
                        (!filterSub || expense.subCategory === filterSub) &&
@@ -898,12 +881,10 @@
             
             if (filteredExpenses.length === 0) {
                 tbody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="empty-state">
-                            <div class="empty-state-icon">📋</div>
-                            <div>Nessuna spesa trovata</div>
-                        </td>
-                    </tr>
+                    <tr><td colspan="6" class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <div>Nessuna spesa trovata</div>
+                    </td></tr>
                 `;
                 return;
             }
@@ -913,11 +894,11 @@
                 
                 let deadlineBadge = '';
                 if (expense.deadline) {
-                    const daysUntilDeadline = getDaysUntilDeadline(expense.deadline);
-                    if (daysUntilDeadline <= 3) {
+                    const daysUntil = getDaysUntilDeadline(expense.deadline);
+                    if (daysUntil <= 3) {
                         row.classList.add('deadline-urgent');
                         deadlineBadge = '<span class="badge badge-danger">Urgente</span>';
-                    } else if (daysUntilDeadline <= 7) {
+                    } else if (daysUntil <= 7) {
                         row.classList.add('deadline-warning');
                         deadlineBadge = '<span class="badge badge-warning">Prossima</span>';
                     }
@@ -928,8 +909,8 @@
                     <td>
                         <div class="category-hierarchy">
                             <strong>${expense.macroCategory}</strong><br>
-                            └ ${expense.subCategory}<br>
-                            &nbsp;&nbsp;&nbsp;└ ${expense.voice}
+                            ${expense.subCategory ? `└ ${expense.subCategory}<br>` : ''}
+                            &nbsp;&nbsp;└ ${expense.voice}
                         </div>
                     </td>
                     <td><span class="expense-amount">€ ${expense.amount.toFixed(2)}</span></td>
@@ -956,7 +937,7 @@
                 renderExpenses();
                 updateDeadlines();
                 updateStats();
-                showMessage('Spesa eliminata con successo', 'success');
+                showMessage('Spesa eliminata', 'success');
             }
         }
         
@@ -967,49 +948,80 @@
             renderExpenses();
         }
         
-        // Gestione categorie
-        function addCategory(e) {
-            e.preventDefault();
+        function addCategoryClick() {
+            console.log('addCategoryClick chiamata!');
             
-            const macro = document.getElementById('new-macro').value.trim().toUpperCase();
-            const sub = document.getElementById('new-sub').value.trim().toUpperCase();
-            const voice = document.getElementById('new-voice').value.trim().toUpperCase();
+            const macroInput = document.getElementById('new-macro');
+            const subInput = document.getElementById('new-sub');
             
-            if (!macro || !sub || !voice) {
-                showMessage('Compila tutti i campi!', 'error');
+            if (!macroInput || !subInput) {
+                console.error('Input non trovati!');
+                showMessage('Errore: campi non trovati', 'error');
                 return;
             }
             
+            const macro = macroInput.value.trim().toUpperCase();
+            const sub = subInput.value.trim().toUpperCase();
+            
+            console.log('Valori letti:', {macro, sub});
+            
+            if (!macro) {
+                showMessage('Inserisci una macro categoria!', 'error');
+                return;
+            }
+            
+            // Crea o aggiorna categoria
             if (!categories[macro]) {
-                categories[macro] = {};
+                // Nuova macro categoria
+                categories[macro] = sub ? [sub] : [];
+                console.log('Nuova macro categoria creata:', macro);
+                showMessage(`Macro categoria "${macro}" creata${sub ? ` con sottocategoria "${sub}"` : ''}!`, 'success');
+            } else {
+                // Macro categoria esiste già
+                if (sub) {
+                    if (!categories[macro].includes(sub)) {
+                        categories[macro].push(sub);
+                        categories[macro].sort();
+                        console.log('Sottocategoria aggiunta:', sub);
+                        showMessage(`Sottocategoria "${sub}" aggiunta a "${macro}"!`, 'success');
+                    } else {
+                        showMessage(`La sottocategoria "${sub}" esiste già in "${macro}"!`, 'error');
+                        return;
+                    }
+                } else {
+                    showMessage(`La macro categoria "${macro}" esiste già! Aggiungi una sottocategoria o usa un nome diverso.`, 'error');
+                    return;
+                }
             }
             
-            if (!categories[macro][sub]) {
-                categories[macro][sub] = [];
-            }
+            console.log('Categories dopo aggiunta:', categories);
             
-            if (!categories[macro][sub].includes(voice)) {
-                categories[macro][sub].push(voice);
-                categories[macro][sub].sort();
-            }
-            
+            // Salva e aggiorna
             saveData();
             updateAllSelects();
             renderCategories();
             
-            document.getElementById('category-form').reset();
-            showMessage('Categoria aggiunta con successo!', 'success');
+            // Reset solo campo sottocategoria per permettere aggiunta multipla
+            subInput.value = '';
+            // Mantieni la macro categoria per aggiungere più sottocategorie facilmente
         }
         
         function renderCategories() {
             const tree = document.getElementById('categories-tree');
             tree.innerHTML = '';
             
+            // Aggiorna anche le opzioni datalist
+            updateDatalistOptions();
+            updateSubDatalist();
+            
             if (Object.keys(categories).length === 0) {
                 tree.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">📁</div>
                         <div>Nessuna categoria configurata</div>
+                        <div style="margin-top: 1rem; font-size: 0.875rem;">
+                            Aggiungi una macro categoria per iniziare
+                        </div>
                     </div>
                 `;
                 return;
@@ -1020,49 +1032,37 @@
                 macroDiv.innerHTML = `
                     <div class="category-item">
                         <strong>📂 ${macro}</strong>
-                        <button class="btn btn-danger btn-sm" onclick="deleteCategory('${macro}')">
+                        <button class="btn btn-danger btn-sm" onclick="deleteMacroCategory('${macro}')">
                             Elimina
                         </button>
                     </div>
                 `;
                 tree.appendChild(macroDiv);
                 
-                Object.keys(categories[macro]).sort().forEach(sub => {
-                    const subDiv = document.createElement('div');
-                    subDiv.style.marginLeft = '20px';
-                    subDiv.innerHTML = `
-                        <div class="category-item">
-                            <span>📁 ${sub}</span>
-                            <button class="btn btn-danger btn-sm" onclick="deleteSubCategory('${macro}', '${sub}')">
-                                Elimina
-                            </button>
-                        </div>
-                    `;
-                    tree.appendChild(subDiv);
-                    
-                    categories[macro][sub].sort().forEach(voice => {
-                        const voiceDiv = document.createElement('div');
-                        voiceDiv.style.marginLeft = '40px';
-                        voiceDiv.innerHTML = `
+                if (Array.isArray(categories[macro])) {
+                    categories[macro].forEach(sub => {
+                        const subDiv = document.createElement('div');
+                        subDiv.style.marginLeft = '20px';
+                        subDiv.innerHTML = `
                             <div class="category-item">
-                                <span>📄 ${voice}</span>
-                                <button class="btn btn-danger btn-sm" onclick="deleteVoice('${macro}', '${sub}', '${voice}')">
+                                <span>📁 ${sub}</span>
+                                <button class="btn btn-danger btn-sm" onclick="deleteSubCategory('${macro}', '${sub}')">
                                     Elimina
                                 </button>
                             </div>
                         `;
-                        tree.appendChild(voiceDiv);
+                        tree.appendChild(subDiv);
                     });
-                });
+                }
             });
         }
         
-        function deleteCategory(macro) {
-            if (!confirm(`Sei sicuro di voler eliminare la macro categoria "${macro}"?`)) return;
+        function deleteMacroCategory(macro) {
+            if (!confirm(`Eliminare "${macro}"?`)) return;
             
             const hasExpenses = expenses.some(expense => expense.macroCategory === macro);
             if (hasExpenses) {
-                showMessage('Impossibile eliminare: ci sono spese associate a questa categoria', 'error');
+                showMessage('Impossibile eliminare: ci sono spese associate', 'error');
                 return;
             }
             
@@ -1070,65 +1070,31 @@
             saveData();
             updateAllSelects();
             renderCategories();
-            showMessage('Categoria eliminata con successo', 'success');
+            showMessage('Categoria eliminata', 'success');
         }
         
         function deleteSubCategory(macro, sub) {
-            if (!confirm(`Sei sicuro di voler eliminare la sotto categoria "${sub}"?`)) return;
+            if (!confirm(`Eliminare "${sub}"?`)) return;
             
             const hasExpenses = expenses.some(expense => 
                 expense.macroCategory === macro && expense.subCategory === sub
             );
             if (hasExpenses) {
-                showMessage('Impossibile eliminare: ci sono spese associate a questa categoria', 'error');
+                showMessage('Impossibile eliminare: ci sono spese associate', 'error');
                 return;
             }
             
-            delete categories[macro][sub];
-            
-            if (Object.keys(categories[macro]).length === 0) {
-                delete categories[macro];
+            const index = categories[macro].indexOf(sub);
+            if (index > -1) {
+                categories[macro].splice(index, 1);
             }
             
             saveData();
             updateAllSelects();
             renderCategories();
-            showMessage('Sotto categoria eliminata con successo', 'success');
+            showMessage('Sottocategoria eliminata', 'success');
         }
         
-        function deleteVoice(macro, sub, voice) {
-            if (!confirm(`Sei sicuro di voler eliminare la voce "${voice}"?`)) return;
-            
-            const hasExpenses = expenses.some(expense => 
-                expense.macroCategory === macro && 
-                expense.subCategory === sub && 
-                expense.voice === voice
-            );
-            if (hasExpenses) {
-                showMessage('Impossibile eliminare: ci sono spese associate a questa voce', 'error');
-                return;
-            }
-            
-            const voiceIndex = categories[macro][sub].indexOf(voice);
-            if (voiceIndex > -1) {
-                categories[macro][sub].splice(voiceIndex, 1);
-            }
-            
-            if (categories[macro][sub].length === 0) {
-                delete categories[macro][sub];
-                
-                if (Object.keys(categories[macro]).length === 0) {
-                    delete categories[macro];
-                }
-            }
-            
-            saveData();
-            updateAllSelects();
-            renderCategories();
-            showMessage('Voce eliminata con successo', 'success');
-        }
-        
-        // Gestione scadenze
         function updateDeadlines() {
             const period = parseInt(document.getElementById('deadline-period').value);
             const container = document.getElementById('deadlines-list');
@@ -1139,7 +1105,6 @@
             
             const upcomingDeadlines = expenses.filter(expense => {
                 if (!expense.deadline) return false;
-                
                 const deadlineDate = new Date(expense.deadline);
                 return deadlineDate >= today && deadlineDate <= futureDate;
             }).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
@@ -1159,25 +1124,25 @@
             upcomingDeadlines.forEach(expense => {
                 const daysUntil = getDaysUntilDeadline(expense.deadline);
                 let badgeClass = 'badge-warning';
-                let urgencyText = '';
+                let urgencyText = `Scade tra ${daysUntil} giorni`;
                 
                 if (daysUntil <= 3) {
                     badgeClass = 'badge-danger';
-                    urgencyText = 'Scade tra ' + daysUntil + (daysUntil === 1 ? ' giorno' : ' giorni');
-                } else {
-                    urgencyText = 'Scade tra ' + daysUntil + ' giorni';
+                    urgencyText = `Scade tra ${daysUntil} giorni`;
                 }
                 
-                const deadlineCard = document.createElement('div');
-                deadlineCard.className = 'card';
-                deadlineCard.innerHTML = `
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <div class="category-hierarchy">
-                                <strong>${expense.macroCategory}</strong> → ${expense.subCategory} → ${expense.voice}
+                                <strong>${expense.macroCategory}</strong>
+                                ${expense.subCategory ? ` → ${expense.subCategory}` : ''}
+                                → ${expense.voice}
                             </div>
                             <div class="expense-amount">€ ${expense.amount.toFixed(2)}</div>
-                            <div style="color: #64748b; font-size: 0.875rem; margin-top: 0.25rem;">
+                            <div style="color: var(--gray-500); margin-top: 0.25rem;">
                                 ${expense.description || 'Nessuna descrizione'}
                             </div>
                         </div>
@@ -1189,12 +1154,10 @@
                         </div>
                     </div>
                 `;
-                
-                container.appendChild(deadlineCard);
+                container.appendChild(card);
             });
         }
         
-        // Statistiche
         function initializeStats() {
             const today = new Date();
             const firstDay = new Date(today.getFullYear(), 0, 1);
@@ -1212,7 +1175,7 @@
             const container = document.getElementById('stats-results');
             
             if (!fromDate || !toDate) {
-                container.innerHTML = '<p>Seleziona un periodo valido per vedere le statistiche.</p>';
+                container.innerHTML = '<p>Seleziona un periodo valido.</p>';
                 return;
             }
             
@@ -1231,7 +1194,7 @@
                 container.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">📊</div>
-                        <div>Nessuna spesa trovata nel periodo selezionato</div>
+                        <div>Nessuna spesa nel periodo selezionato</div>
                     </div>
                 `;
                 return;
@@ -1247,26 +1210,6 @@
                 }
                 byMacro[expense.macroCategory].total += expense.amount;
                 byMacro[expense.macroCategory].count += 1;
-            });
-            
-            const bySub = {};
-            filteredExpenses.forEach(expense => {
-                const key = `${expense.macroCategory} → ${expense.subCategory}`;
-                if (!bySub[key]) {
-                    bySub[key] = { total: 0, count: 0 };
-                }
-                bySub[key].total += expense.amount;
-                bySub[key].count += 1;
-            });
-            
-            const byVoice = {};
-            filteredExpenses.forEach(expense => {
-                const key = `${expense.macroCategory} → ${expense.subCategory} → ${expense.voice}`;
-                if (!byVoice[key]) {
-                    byVoice[key] = { total: 0, count: 0 };
-                }
-                byVoice[key].total += expense.amount;
-                byVoice[key].count += 1;
             });
             
             container.innerHTML = `
@@ -1318,77 +1261,14 @@
                         </table>
                     </div>
                 </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Per Sotto Categoria</h3>
-                    </div>
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Sotto Categoria</th>
-                                    <th>Totale</th>
-                                    <th>Numero Spese</th>
-                                    <th>Media</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${Object.entries(bySub)
-                                    .sort((a, b) => b[1].total - a[1].total)
-                                    .map(([category, data]) => `
-                                        <tr>
-                                            <td>${category}</td>
-                                            <td class="expense-amount">€ ${data.total.toFixed(2)}</td>
-                                            <td>${data.count}</td>
-                                            <td>€ ${(data.total / data.count).toFixed(2)}</td>
-                                        </tr>
-                                    `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Per Voce Specifica</h3>
-                    </div>
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Voce</th>
-                                    <th>Totale</th>
-                                    <th>Numero Spese</th>
-                                    <th>Media</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${Object.entries(byVoice)
-                                    .sort((a, b) => b[1].total - a[1].total)
-                                    .map(([voice, data]) => `
-                                        <tr>
-                                            <td style="font-size: 0.875rem;">${voice}</td>
-                                            <td class="expense-amount">€ ${data.total.toFixed(2)}</td>
-                                            <td>${data.count}</td>
-                                            <td>€ ${(data.total / data.count).toFixed(2)}</td>
-                                        </tr>
-                                    `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             `;
         }
         
-        // Export/Import dati
         function exportData() {
-            console.log('Export clicked');
             const data = {
                 categories: categories,
                 expenses: expenses,
-                exportDate: new Date().toISOString(),
-                version: "1.0"
+                exportDate: new Date().toISOString()
             };
             
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -1396,17 +1276,16 @@
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = `spese-casa-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `spese-${new Date().toISOString().split('T')[0]}.json`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            showMessage('Dati esportati con successo!', 'success');
+            showMessage('Dati esportati!', 'success');
         }
         
         function importData(e) {
-            console.log('Import file selected');
             const file = e.target.files[0];
             if (!file) return;
             
@@ -1419,7 +1298,7 @@
                         throw new Error('File non valido');
                     }
                     
-                    if (confirm('Importare i dati sostituirà tutti i dati attuali. Continuare?')) {
+                    if (confirm('Sostituire tutti i dati attuali?')) {
                         categories = data.categories;
                         expenses = data.expenses;
                         
@@ -1430,23 +1309,18 @@
                         updateDeadlines();
                         updateStats();
                         
-                        showMessage(`Importati ${expenses.length} spese e ${Object.keys(categories).length} categorie`, 'success');
+                        showMessage('Dati importati!', 'success');
                     }
-                    
                 } catch (error) {
-                    console.error('Errore importazione:', error);
-                    showMessage('Errore durante l\'importazione del file', 'error');
+                    showMessage('Errore importazione file', 'error');
                 }
             };
-            
             reader.readAsText(file);
             e.target.value = '';
         }
         
-        // Funzioni di utilità
         function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('it-IT');
+            return new Date(dateString).toLocaleDateString('it-IT');
         }
         
         function getDaysUntilDeadline(deadlineString) {
